@@ -1,3 +1,40 @@
+// Theme Management
+function initTheme() {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // If no saved theme, use system preference
+    const theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : (prefersDark ? 'dark' : 'light');
+    
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+    // Icon updates are handled by CSS, but we can add additional logic here if needed
+}
+
+// Initialize theme on page load
+initTheme();
+
+// Theme toggle button event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+});
+
 // Initialize button hover effects and fetch GitHub data
 document.addEventListener('DOMContentLoaded', function() {
     // Add hover effects to buttons
@@ -79,8 +116,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to fetch GitHub data (stars, version, downloads)
 function fetchGitHubData() {
-    const repoOwner = 'memstechtips';
-    const repoName = 'Winhance';
+    const repoOwner = 'o9-9';
+    const repoName = 'nonsense';
     const repoUrl = `https://api.github.com/repos/${repoOwner}/${repoName}`;
     const releasesUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`;
 
